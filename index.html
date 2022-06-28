@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Quiz
-    </title>
+    <title>CSS Box Styling</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 </head>
+
 <body>
-    
+    <header>
+        <div class="large-font">Javascript Code Quiz Game</div>
+        <button class="start-button">Start Game</button>
+    </header>
+
+    <main>
+        <section>
+            <div class="card question-card" id="choice-card">
+                <div class="question-textarea">this div is where questions will display</div>
+            </div>
+        </section>
+        <section>
+            <div class="card results" id="result-card">
+                <div class="win-loss-container">
+                    <div>
+                        <h2>Your Score: <span class="score">0 </span> </h2>
+                    </div>
+                    <button class="reset-button">Reset Score</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
+
 </html>

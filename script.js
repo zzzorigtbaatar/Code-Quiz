@@ -126,7 +126,7 @@ function endGame() {
 
 }
 
-//listener for submitting user score and initials
+//button listener for submitting user score and initials
 submitButton.addEventListener("click", function() {
     var userInitial = document.getElementById("user-initial").value;
     //if there is no locally stored quiz-score, previousScore is set to an empty value?

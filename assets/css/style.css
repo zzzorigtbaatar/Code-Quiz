@@ -29,6 +29,10 @@
     margin-top: 16px;
   }
   
+  #result{
+    text-align: center;
+  }
+
   button {
     background: #82caf3;
     border-radius: 8px;

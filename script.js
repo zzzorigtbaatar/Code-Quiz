@@ -27,5 +27,20 @@ function displayScore() {
     score.textContent = scoreCounter;
 }
 
+//calls startGame function when clicked
+startButton.addEventListener("click", startGame);
+
 //call init() when page script is run
 init();
+
+
+
+
+// resets score and displays new value
+function resetGame() {
+    scoreCounter = 0;
+    displayScore();
+}
+
+//calls resetGame function when clicked
+resetButton.addEventListener("click", resetGame);

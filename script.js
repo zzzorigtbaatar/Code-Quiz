@@ -27,6 +27,41 @@ function displayScore() {
     score.textContent = scoreCounter;
 }
 
+function startGame() {
+    gameOver = false;
+    timerCount = 45;
+    startButton.disabled = true;
+    displayQuestions();
+    startTimer();
+}
+
+//displays question object attributes
+function displayQuestions() {
+
+}
+
+
+//called if win condition is met
+function winGame() {
+    welcomeText.textContent = "You got them all! Nice!";
+    startButton.disabled = false;
+    setScore()
+}
+
+function endGame(){
+    welcomeText.textContent = "Time's Up!";
+    startButton.disabled = false;
+    setScore()
+}
+
+// Updates win count on screen and sets win count to client storage
+function setScore() {
+    score.textContent = scoreCounter;
+    var userInput = window.prompt("You scored " + scoreCounter + ". Enter your initials:");
+    localStorage.setItem("winCount", scoreCounter);
+    localStorage.setItem("initials", userInput);
+  }
+
 //calls startGame function when clicked
 startButton.addEventListener("click", startGame);
 

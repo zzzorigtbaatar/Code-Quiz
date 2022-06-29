@@ -121,7 +121,7 @@ function endGame() {
     clearInterval(timer);
     timerElement.innerText = timerCount;
     questionList.style.visibility = "hidden";
-    score.textContent = "You scored: " + (currentScore + " with " + timerCount + " seconds remaining.");
+    score.textContent = "You got " + (currentScore + " correct with " + timerCount + " seconds remaining.");
     result.textContent = "Thanks for playing!";
 
 }

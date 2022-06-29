@@ -5,7 +5,7 @@
 Welcome to Code Quiz.
 
 This project aims to showcase my ability in utilizing Web APIs by presenting a quiz game with dynamically updating questions alongside a timer: 
-![](./assets/images/gif-code-quiz.gif)
+![](./assets/images/demo-code-quiz.gif)
 
 and storing user scores locally:
 ![](./assets/images/screenshot-local-storage.png)

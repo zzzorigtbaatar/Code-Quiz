@@ -40,6 +40,22 @@ function displayQuestions() {
 
 }
 
+function startTimer() {
+    timer = setInterval(function () {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount >= 0) {
+            if (gameOver && timerCount > 0) {
+                clearInterval(timer);
+                winGame();
+            }
+        }
+        if (timerCount === 0) {
+            clearInterval(timer);
+            endGame();
+        }
+    }, 1000);
+}
 
 //called if win condition is met
 function winGame() {

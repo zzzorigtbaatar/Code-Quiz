@@ -13,7 +13,18 @@ var timerCount = 0;
 
 //runs when the page is loaded
 function init() {
+    displayScore();
+}
 
+//puts locally stored high score if there is any
+function displayScore() {
+    var storedScore = localStorage.getItem("scoreCount");
+    if (storedScore === null) {
+        scoreCounter = 0;
+    } else {
+        scoreCounter = storedScore;
+    }
+    score.textContent = scoreCounter;
 }
 
 //call init() when page script is run

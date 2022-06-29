@@ -4,9 +4,17 @@ var score = document.querySelector(".score")
 var startButton = document.querySelector(".start-button");
 var resetButton = document.querySelector(".reset-button");
 var timerElement = document.querySelector(".timer-count");
+var questionList = document.querySelector(".question-list");
+var questionTitle = document.querySelector("#question-title");
+var choice1 = document.querySelector("#choice1");
+var choice2 = document.querySelector("#choice2");
+var choice3 = document.querySelector("#choice3");
+var choice4 = document.querySelector("#choice4");
+
 var gameOver = false;
 
 //initial values for variables
+var chosenQuestion;
 var scoreCounter = 0;
 var timer;
 var timerCount = 0;
@@ -16,12 +24,12 @@ var timerCount = 0;
 // q : {question: 'insert question here?', choice1: "insert choice1" , choice2: "insert choice2" , choice3: "insert choice3" , choice4: "insert choice4" , correctChoice: "insert correct choice"}
 //Reference: https://stackoverflow.com/a/37077847
 var questions = {
-    q1 : {question: 'How do you not increment variable i by 1?', choice1: "i++" , choice2: "i+1" , choice3: "i += 1" , choice4: "i = 1" , correctChoice: "i = 1"},
-    q2 : {question: 'How do you add an element to an existing one?', choice1: ".append()" , choice2: ".glue()" , choice3: ".createNewElement()" , choice4: ".add()" , correctChoice: ".append()"},
-    q3 : {question: 'What is not a data type?', choice1: "integer" , choice2: "string" , choice3: "boolean" , choice4: "count" , correctChoice: "count"}
+    q1: { question: 'How do you not increment variable i by 1?', choice1: "i++", choice2: "i+1", choice3: "i += 1", choice4: "i = 1", correctChoice: "i = 1", isUsed: false },
+    q2: { question: 'How do you add an element to an existing one?', choice1: ".append()", choice2: ".glue()", choice3: ".createNewElement()", choice4: ".add()", correctChoice: ".append()", isUsed: false },
+    q3: { question: 'What is not a data type?', choice1: "integer", choice2: "string", choice3: "boolean", choice4: "count", correctChoice: "count", isUsed: false }
 }
 
-//questions to ask
+//array of questions to ask
 var allQuestions = [];
 
 //inserts questions into allQuestions array
@@ -42,7 +50,9 @@ function displayScore() {
     } else {
         scoreCounter = storedScore;
     }
-    score.textContent = scoreCounter + "(High Score)";
+    questionList.style.visibility = "hidden";
+    score.textContent = scoreCounter;
+    // score.textContent = scoreCounter + " (High Score)";
 }
 
 function startGame() {
@@ -51,26 +61,27 @@ function startGame() {
     timerCount = 45;
     startButton.disabled = true;
     resetButton.disabled = true;
-    displayQuestions();
+    displayQuestion();
     startTimer();
 }
 
-var questionObject = {
-    question: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-    answer4: "",
-    correctAnswer: ""
-  };
-  
 
-//displays question object attributes
-function displayQuestions() {
-    score.textContent = scoreCounter;
-    for(i = 0; i < questionsArray.length; i++){
+//displays question on screen
+function displayQuestion() {
+    // Randomly picks question from questions array
+    chosenQuestion = allQuestions[Math.floor(Math.random() * allQuestions.length)];
 
-    }
+    do {
+        chosenQuestion = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+    } while (chosenQuestion.isUsed === true)
+
+    questionTitle.textContent = chosenQuestion.question;
+    choice1.textContent = chosenQuestion.choice1;
+    choice2.textContent = chosenQuestion.choice2;
+    choice3.textContent = chosenQuestion.choice3;
+    choice4.textContent = chosenQuestion.choice4;
+
+    questionList.style.visibility = "visible";
 }
 
 function startTimer() {
@@ -94,15 +105,20 @@ function startTimer() {
 function winGame() {
     welcomeText.textContent = "You got them all! Nice!";
     startButton.disabled = false;
-    esetButton.disabled = false;
+    resetButton.disabled = false;
     setScore()
+    questionList.style.visibility = "hidden";
+    gameOver = true;
 }
 
-function endGame(){
+//called if game over condition is met
+function endGame() {
     welcomeText.textContent = "Time's Up!";
     startButton.disabled = false;
-    esetButton.disabled = false;
+    resetButton.disabled = false;
     setScore()
+    questionList.style.visibility = "hidden";
+    gameOver = true;
 }
 
 // Updates win count on screen and sets win count to client storage
@@ -111,7 +127,7 @@ function setScore() {
     var userInput = window.prompt("You scored " + scoreCounter + ". Enter your initials:");
     localStorage.setItem("winCount", scoreCounter);
     localStorage.setItem("initials", userInput);
-  }
+}
 
 //calls startGame function when clicked
 startButton.addEventListener("click", startGame);
@@ -129,3 +145,18 @@ function resetGame() {
 
 //calls resetGame function when clicked
 resetButton.addEventListener("click", resetGame);
+
+//checks if selected choice was correct
+questionList.addEventListener("click", function (event) {
+    if (timerCount === 0) {
+        return;
+    }
+    if (event.target.innerHTML === chosenQuestion.correctChoice && !gameOver) {
+        scoreCounter++;
+        chosenQuestion.isUsed = true;
+        checkWin();
+    } else if (event.target.innerHTML !== chosenQuestion.correctChoice && !gameOver) {
+        chosenQuestion.isUsed = true;
+        checkWin();
+    }
+})

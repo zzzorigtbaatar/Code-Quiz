@@ -86,11 +86,17 @@
     padding: 20px;
   }
 
-  #choice-card {
+
+
+  .question-card {
+    background: #b30732
+  }
+
+  .choice-card {
     background: #9d17eb;
   }
 
- #result-card {
+ .result-card {
     background: #22588b;
   }
 

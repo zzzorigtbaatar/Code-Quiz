@@ -11,7 +11,7 @@ var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
 var choice4 = document.querySelector("#choice4");
 
-//initial values
+//sets initial values
 var timerCount = 45;
 var timer;
 var currentQuestion = 0;
